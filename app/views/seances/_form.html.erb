@@ -1,0 +1,42 @@
+<%= form_with(model: seance) do |form| %>
+  <% if seance.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(seance.errors.count, "error") %> prohibited this seance from being saved:</h2>
+
+      <ul>
+        <% seance.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :start, style: "display: block" %>
+    <%= form.datetime_field :start %>
+  </div>
+
+  <div>
+    <%= form.label :end, style: "display: block" %>
+    <%= form.datetime_field :end %>
+  </div>
+
+  <div>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div>
+    <% options = options_from_collection_for_select(@movies, 'id', 'name') %>
+    <%= form.select :movie_id,  options %>
+  </div>
+
+  <div>
+    <% options = options_from_collection_for_select(@halls, 'id', 'name') %>
+    <%= form.select :hall_id,  options %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

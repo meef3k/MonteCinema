@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_12_113330) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_071239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,8 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_113330) do
   end
 
   create_table "seances", force: :cascade do |t|
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "starts_at"
+    t.datetime "finishes_at"
     t.decimal "price"
     t.bigint "hall_id", null: false
     t.bigint "movie_id", null: false
