@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   resources :seances
   resources :halls
   # Defines the root path route ("/")
-  root "seances#index"
+  root 'seances#index'
 end

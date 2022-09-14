@@ -22,13 +22,13 @@
   </div>
 
   <div>
-    <%= form.label :hall_id, style: "display: block" %>
-    <%= form.text_field :hall_id %>
-  </div>
+     <% options = options_from_collection_for_select(@movies, 'id', 'title') %>
+     <%= form.select :movie_id,  options %>
+   </div>
 
-  <div>
-    <%= form.label :movie_id, style: "display: block" %>
-    <%= form.text_field :movie_id %>
+   <div>
+     <% options = options_from_collection_for_select(@halls, 'id', 'name') %>
+     <%= form.select :hall_id,  options %>
   </div>
 
   <div>
