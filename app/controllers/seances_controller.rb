@@ -1,5 +1,5 @@
 class SeancesController < ApplicationController
-  # GET /seances or /seances.json
+  # GET /seances
   def index
     @seances = Seance.includes(:movie, :hall).all
   end
@@ -9,17 +9,15 @@ class SeancesController < ApplicationController
     @halls = Hall.all
     @movies = Movie.all
   end
-  # POST /seances or /seances.json
+  # POST /seances
   def create
     @seance = Seance.new(seance_params)
 
     respond_to do |format|
       if @seance.save
         format.html { redirect_to seances_url(@seance), notice: "Seance was successfully created." }
-        format.json { render :show, status: :created, location: @seance }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @seance.errors, status: :unprocessable_entity }
       end
     end
   end
