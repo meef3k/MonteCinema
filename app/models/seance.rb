@@ -12,12 +12,16 @@ class Seance < ApplicationRecord
   end
 
   def used?
-    if Seance.where(hall_id: hall_id)
-      .where(starts_at: starts_at .. finishes_at)
-      .or(Seance.where(hall_id: hall_id)
-      .where(finishes_at: starts_at .. finishes_at))
-      .any?
+    return if hall_available?
       errors.add(:starts_at, "Hall is used for another seance")
-    end
+  end
+
+  def hall_available?
+    Seance
+      .where(hall_id: hall_id)
+      .where(finishes_at: starts_at .. finishes_at)
+      .or(Seance.where(hall_id: hall_id)
+      .where(starts_at: starts_at .. finishes_at))
+      .empty?
   end
 end

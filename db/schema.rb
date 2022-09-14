@@ -10,29 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_13_071239) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_12_113330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "halls", force: :cascade do |t|
-    t.string "name"
-    t.integer "capacity"
+    t.string "name", null: false
+    t.integer "capacity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "movies", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.integer "duration"
+    t.string "title", null: false
+    t.text "description", null: false
+    t.integer "duration", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "seances", force: :cascade do |t|
-    t.datetime "starts_at"
-    t.datetime "finishes_at"
-    t.decimal "price"
+    t.datetime "starts_at", null: false
+    t.datetime "finishes_at", null: false
+    t.decimal "price", null: false
     t.bigint "hall_id", null: false
     t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
