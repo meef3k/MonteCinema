@@ -2,6 +2,7 @@ class SeancesController < ApplicationController
   # GET /seances
   def index
     @seances = Seance.includes(:movie, :hall).all
+    # movie.seances.all
   end
 
   # GET /seances/new

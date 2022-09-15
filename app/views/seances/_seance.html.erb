@@ -1,26 +1,11 @@
-<div id="<%= dom_id seance %>">
-  <p>
-    <strong>Movie:</strong>
-    <%= seance.movie.title %>
-  </p>
-
-  <p>
-    <strong>Hall:</strong>
-    <%= seance.hall.name %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= seance.price %>$
-  </p>
-
-  <p>
-    <strong>Start:</strong>
-    <%= seance.starts_at %>
-  </p>
-
-  <p>
-    <strong>End:</strong>
-    <%= seance.finishes_at %>
-  </p>
+<div class="card m-2"  id="<%= dom_id seance %>">
+  <div class="card-header">
+    <h5><%= seance.movie.title %></h5>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>Starts at: <%= formatted_date(seance.starts_at) %></p>
+      <footer class="blockquote-footer"><%= seance.movie.duration %> min</footer>
+    </blockquote>
+  </div>
 </div>
