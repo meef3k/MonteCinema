@@ -1,17 +1,7 @@
-<div id="<%= dom_id movie %>">
-  <p>
-    <strong>Name:</strong>
-    <%= movie.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= movie.description %>
-  </p>
-
-  <p>
-    <strong>Duration:</strong>
-    <%= movie.duration %>
-  </p>
-
+<div id="<%= dom_id movie %>" class="card w-75 p-3 mx-auto col-md-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= movie.title %></h5>
+    <h6 class="card-subtitle mb-2 text-muted">Duration: <%= movie.duration %> min</h6>
+    <p class="card-text"><%= movie.description %></p>
+  </div>
 </div>
