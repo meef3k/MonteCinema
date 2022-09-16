@@ -1,7 +1,21 @@
-<div id="<%= dom_id movie %>" class="card w-75 p-3 mx-auto col-md-3">
+<div id="<%= dom_id movie %>" class="card w-50 p-3 mx-auto col-md-3">
   <div class="card-body">
     <h5 class="card-title"><%= movie.title %></h5>
     <h6 class="card-subtitle mb-2 text-muted">Duration: <%= movie.duration %> min</h6>
     <p class="card-text"><%= movie.description %></p>
   </div>
+  <table class="table table-hover mx-auto">
+  <thead>
+    <tr>
+      <th scope="col">Seances times</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movieseances.each do |seance| %>
+      <tr>
+        <td><%= formatted_date(seance.starts_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </div>

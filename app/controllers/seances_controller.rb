@@ -1,7 +1,10 @@
 class SeancesController < ApplicationController
   # GET /seances
   def index
-    @seances = Seance.includes(:movie, :hall).where(starts_at: Date.today..Date.tomorrow)
+    @seances = Seance
+               .includes(:movie)
+               .where(starts_at: DateTime.current..Date.today + 7.days)
+               .order(:movie_id, :starts_at)
   end
 
   # GET /seances/new
