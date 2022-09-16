@@ -8,7 +8,7 @@ class Seance < ApplicationRecord
   validate :used?
 
   def set_finishes_at
-    self.finishes_at = starts_at + movie.duration.minutes + 60.minutes
+    self.finishes_at = starts_at + movie.duration.minutes + ADS_TIME
   end
 
   def start_nil?
