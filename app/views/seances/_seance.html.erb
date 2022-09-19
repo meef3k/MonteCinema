@@ -1,26 +1,4 @@
-<div id="<%= dom_id seance %>">
-  <p>
-    <strong>Movie:</strong>
-    <%= seance.movie.title %>
-  </p>
-
-  <p>
-    <strong>Hall:</strong>
-    <%= seance.hall.name %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= seance.price %>$
-  </p>
-
-  <p>
-    <strong>Start:</strong>
-    <%= seance.starts_at %>
-  </p>
-
-  <p>
-    <strong>End:</strong>
-    <%= seance.finishes_at %>
-  </p>
-</div>
+<tr>
+  <td><%= link_to seance.movie.title, seance.movie %></td>
+  <td><%= formatted_date(seance.starts_at) %></td>
+</tr>

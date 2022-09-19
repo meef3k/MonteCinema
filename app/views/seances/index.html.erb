@@ -2,8 +2,16 @@
 
 <h1>Seances</h1>
 
-<div id="seances">
-  <% @seances.each do |seance| %>
-    <%= render seance %>
-  <% end %>
-</div>
+<table class="table table-hover w-75 mx-auto">
+  <thead>
+    <tr>
+      <th scope="col">Movie</th>
+      <th scope="col">Seances times</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @seances.each do |seance| %>
+      <%= render seance %>
+    <% end %>
+  </tbody>
+</table>
