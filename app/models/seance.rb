@@ -29,4 +29,13 @@ class Seance < ApplicationRecord
       .where(starts_at: starts_at..finishes_at))
       .empty?
   end
+
+  def self.today_seances
+    Seance
+      .joins(:movie)
+      .select('seances.id, seances.starts_at, seances.movie_id, movies.title as m_title')
+      .where(starts_at: DateTime.current..DateTime.current.end_of_day)
+      .order(:movie_id, :starts_at)
+      .group_by(&:m_title)
+  end
 end

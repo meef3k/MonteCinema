@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Seances</h1>
+<h1>Today Seances</h1>
 
 <table class="table table-hover w-75 mx-auto">
   <thead>
@@ -10,8 +10,15 @@
     </tr>
   </thead>
   <tbody>
-    <% @seances.each do |seance| %>
-      <%= render seance %>
+    <% @seances.each do |movie, seances| %>
+      <tr>
+        <td><%= movie %></td>
+        <td>
+        <% seances.each do |seance|%>
+          <%= formatted_date(seance.starts_at) %>
+        <% end %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
