@@ -3,7 +3,7 @@ class SeancesController < ApplicationController
   def index
     @seances = Seance
                .includes(:movie)
-               .where(starts_at: DateTime.current..Date.today + 7.days)
+               .where(starts_at: DateTime.current..7.days.from_now)
                .order(:movie_id, :starts_at)
   end
 

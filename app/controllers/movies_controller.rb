@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     @movieseances = Seance
                     .where(movie_id: params[:id])
-                    .where(starts_at: DateTime.current..Date.today + 7.days)
+                    .where(starts_at: DateTime.current..7.days.from_now)
                     .order(:starts_at)
   end
 end
