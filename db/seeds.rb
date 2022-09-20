@@ -37,3 +37,12 @@ s7 = Seance.create(movie_id: 7, hall_id: 4, starts_at: Time.now + 2.days, price:
 s8 = Seance.create(movie_id: 8, hall_id: 3, starts_at: Time.now + 5.days, price: 14)
 s9 = Seance.create(movie_id: 9, hall_id: 2, starts_at: Time.now + 3.days, price: 12)
 s10 = Seance.create(movie_id: 10, hall_id: 1, starts_at: Time.now + 1.days, price: 10)
+
+p1 = Promotion.create(amount: 3, value: "10% discount for snack set in snack bar")
+p2 = Promotion.create(amount: 4, value: "15% discount for snack set in snack bar")
+p3 = Promotion.create(amount: 5, value: "20% discount for snack set in snack bar")
+p4 = Promotion.create(amount: 6, value: "30% discount for snack set in snack bar")
+p5 = Promotion.create(amount: 7, value: "35% discount for snack set in snack bar")
+p6 = Promotion.create(amount: 8, value: "40% discount for snack set in snack bar")
+p7 = Promotion.create(amount: 9, value: "45% discount for snack set in snack bar")
+p8 = Promotion.create(amount: 10, value: "50% discount for snack set in snack bar")
