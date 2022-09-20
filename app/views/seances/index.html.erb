@@ -10,12 +10,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @seances.each do |movie, seances| %>
+    <% @movies.each do |movie| %>
       <tr>
-        <td><%= movie %></td>
+        <td><%= link_to movie.title, movie %></td>
         <td>
-        <% seances.each do |seance|%>
-          <%= formatted_date(seance.starts_at) %>
+        <% movie.seances.each do |seance| %>
+          <%= link_to formatted_date(seance.starts_at), seance %>
         <% end %>
         </td>
       </tr>

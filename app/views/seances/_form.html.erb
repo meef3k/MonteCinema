@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
+    <%= form.text_field :price, class: "form-label" %>
   </div>
 
   <div>
@@ -31,7 +31,11 @@
      <%= form.select :hall_id,  options %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="col-auto">
+    <%= form.submit class: 'btn btn-primary mb-3' %>
+  </div>
+
+  <div class="col-auto">
+    <%= link_to "Back to seances", seances_path, class: 'btn btn-primary mb-3' %>
   </div>
 <% end %>

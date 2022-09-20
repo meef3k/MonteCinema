@@ -1,7 +1,7 @@
 class SeancesController < ApplicationController
   # GET /seances
   def index
-    @seances = Seance.today_seances
+    @movies = Movie.today
   end
 
   # GET /seances/new
