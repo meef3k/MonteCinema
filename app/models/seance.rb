@@ -1,4 +1,5 @@
 class Seance < ApplicationRecord
+  has_many :reservations
   belongs_to :hall
   belongs_to :movie
   before_validation :set_finishes_at, unless: :start_nil?
