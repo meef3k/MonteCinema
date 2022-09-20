@@ -3,6 +3,6 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     @seances = Seance
                .where(movie_id: params[:id])
-               .week
+               .this_week
   end
 end

@@ -7,7 +7,7 @@ class Seance < ApplicationRecord
   validates :price, numericality: { only_decimal: true, greater_than: 0 }
   validate :used?
 
-  scope :week, lambda {
+  scope :this_week, lambda {
     where(starts_at: DateTime.current.beginning_of_day...7.days.from_now)
       .order('starts_at')
   }
