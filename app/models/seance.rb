@@ -8,8 +8,8 @@ class Seance < ApplicationRecord
   validate :used?
 
   scope :week, lambda {
-    where(seances: { starts_at: DateTime.current.beginning_of_day...7.days.from_now })
-      .order('seances.starts_at')
+    where(starts_at: DateTime.current.beginning_of_day...7.days.from_now)
+      .order('starts_at')
   }
 
   def set_finishes_at
