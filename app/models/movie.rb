@@ -8,7 +8,7 @@ class Movie < ApplicationRecord
 
   scope :today, lambda {
     includes(:seances)
-      .where(seances: { starts_at: DateTime.current.beginning_of_day...DateTime.current.end_of_day })
+      .where(seances: { starts_at: DateTime.current.beginning_of_day..DateTime.current.end_of_day })
       .order('seances.starts_at')
   }
 end

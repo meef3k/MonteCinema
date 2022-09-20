@@ -8,7 +8,7 @@ class Seance < ApplicationRecord
   validate :used?
 
   scope :this_week, lambda {
-    where(starts_at: DateTime.current.beginning_of_day...7.days.from_now)
+    where(starts_at: DateTime.current.beginning_of_day..7.days.from_now)
       .order('starts_at')
   }
 
