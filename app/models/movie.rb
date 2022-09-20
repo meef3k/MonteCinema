@@ -6,9 +6,9 @@ class Movie < ApplicationRecord
   validates :description, length: { maximum: 30_000, too_long: '%<count>s characters is the maximum allowed' }
   validates :duration, numericality: { only_integer: true, greater_than: 0 }
 
-  def self.today
+  scope :today, lambda {
     includes(:seances)
       .where(seances: { starts_at: DateTime.current.beginning_of_day...DateTime.current.end_of_day })
       .order('seances.starts_at')
-  end
+  }
 end
