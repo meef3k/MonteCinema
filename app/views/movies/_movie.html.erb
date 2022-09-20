@@ -7,13 +7,13 @@
   <table class="table table-hover mx-auto">
   <thead>
     <tr>
-      <th scope="col">Seances times</th>
+      <th scope="col">Seances for next week</th>
     </tr>
   </thead>
   <tbody>
-    <% @movieseances.each do |seance| %>
+    <% @seances.each do |seance| %>
       <tr>
-        <td><%= formatted_date(seance.starts_at) %></td>
+        <td><%= link_to formatted_date(seance.starts_at), seance %></td>
       </tr>
     <% end %>
   </tbody>

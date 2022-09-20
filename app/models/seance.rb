@@ -7,6 +7,11 @@ class Seance < ApplicationRecord
   validates :price, numericality: { only_decimal: true, greater_than: 0 }
   validate :used?
 
+  scope :this_week, lambda {
+    where(starts_at: DateTime.current.beginning_of_day..7.days.from_now)
+      .order('starts_at')
+  }
+
   def set_finishes_at
     self.finishes_at = starts_at + movie.duration.minutes + ADS_TIME
   end
