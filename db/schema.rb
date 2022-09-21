@@ -30,8 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_120848) do
   end
 
   create_table "promotions", force: :cascade do |t|
-    t.integer "amount", null: false
-    t.string "value", null: false
+    t.integer "value", null: false
+    t.string "information", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
