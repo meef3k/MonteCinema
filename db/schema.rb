@@ -38,7 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_145240) do
 
   create_table "reservations", force: :cascade do |t|
     t.string "email", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.bigint "seance_id", null: false
     t.bigint "promotion_id", null: false
     t.datetime "created_at", null: false
