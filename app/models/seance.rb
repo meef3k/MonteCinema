@@ -35,4 +35,8 @@ class Seance < ApplicationRecord
       .where(starts_at: starts_at..finishes_at))
       .empty?
   end
+
+  def available_seats
+    hall.seats - Reservation.taken_seats(id)
+  end
 end
