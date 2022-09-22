@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Reservations</h1>
+
+<table class="table table-hover w-75 mx-auto">
+  <thead>
+    <tr>
+      <th scope="col">Reservation id</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.id %></td>
+        <td><%= reservation.email %></td>
+        <td><%= reservation.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
