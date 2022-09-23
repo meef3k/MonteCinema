@@ -29,5 +29,5 @@ end
   end
 
 (1..100).each do |i|
-  Reservation.create(email: "example#{i}@example.com", status: (0..2).to_a.sample, seance_id: (1..10).to_a.sample, promotion_id: (1..8).to_a.sample)
+  Reservation.create(email: "example#{i}@example.com", status: (0..2).to_a.sample, seance_id: (1..10).to_a.sample)
 end

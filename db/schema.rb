@@ -40,10 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_145240) do
     t.string "email", null: false
     t.integer "status", default: 0, null: false
     t.bigint "seance_id", null: false
-    t.bigint "promotion_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["promotion_id"], name: "index_reservations_on_promotion_id"
     t.index ["seance_id"], name: "index_reservations_on_seance_id"
   end
 
@@ -67,7 +65,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_21_145240) do
     t.index ["reservation_id"], name: "index_tickets_on_reservation_id"
   end
 
-  add_foreign_key "reservations", "promotions"
   add_foreign_key "reservations", "seances"
   add_foreign_key "seances", "halls"
   add_foreign_key "seances", "movies"
