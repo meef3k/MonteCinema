@@ -7,8 +7,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 hall_capacities = [20, 50, 50, 50, 50, 100, 100, 100, 100, 200]
 hall_capacities.each_with_index do |capacity, index|
-    i = index + 1
-    Hall.find_or_create_by(name: "Hall #{i}", capacity: capacity)
+  i = index + 1
+  Hall.find_or_create_by(name: "Hall #{i}", capacity: capacity)
 end
 
 movie_titles = ['Harry Potter', 'Lord of The Rings', 'Fast and Furious', 'James Bond', 'Minions', 'Hobbit', 'Star Wars', 'The Godfather', 'Pulp Fiction', 'Avengers: Infinity War']
@@ -17,17 +17,21 @@ movie_titles.each do |title|
 end
 
 (1..10).each do |i|
-    value = 11-i
-    start_time = Time.now + rand(3.days)
-    t_price = (20..30).to_a.sample
-    Seance.find_or_create_by(movie_id: i, hall_id: value, :starts_at => start_time, price: t_price)
+  value = 11-i
+  start_time = Time.now + rand(3.days)
+  t_price = (20..30).to_a.sample
+  Seance.find_or_create_by(movie_id: i, hall_id: value, :starts_at => start_time, price: t_price)
 end
 
 (3..10).each do |i|
-    value = (i-1)*5
-    Promotion.find_or_create_by(value: i, information: "#{value}% discount for snack set in snack bar")
-  end
+  value = (i-1)*5
+  Promotion.find_or_create_by(value: i, information: "#{value}% discount for snack set in snack bar")
+end
 
 (1..100).each do |i|
   Reservation.create(email: "example#{i}@example.com", status: (0..2).to_a.sample, seance_id: (1..10).to_a.sample)
+end
+
+(1..500).each do |i|
+  Ticket.create(seat: (0..200).to_a.sample, reservation_id: (0..100).to_a.sample)
 end
