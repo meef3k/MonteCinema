@@ -12,13 +12,13 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = @seance.reservations.build(reservation_params)
-
-    respond_to do |format|
-      if @reservation.save
-        format.html { redirect_to seance_reservations_path(@seance), notice: 'Post was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if !params[:reservation][:seats].present?
+      @reservation.errors.add(:base, 'Choose at least one seat')
+      render :new, status: :unprocessable_entity
+    else
+      @reservation.save
+      create_tickets
+      redirect_to seances_path
     end
   end
 
@@ -34,5 +34,11 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(:email, :seance_id)
+  end
+
+  def create_tickets
+    params[:reservation][:seats].each do |seat|
+      Ticket.create(reservation_id: @reservation.id, seat:)
+    end
   end
 end
