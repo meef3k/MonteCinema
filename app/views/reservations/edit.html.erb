@@ -1,0 +1,47 @@
+<div class="card w-50 p-3 mx-auto col-md-3">
+  <%= form_with(model: [@seance, @reservation], local: true) do |form| %>
+  <% if @reservation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+        <% @reservation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="card-body">
+    <h5 class="card-title"><%= @seance.movie.title %></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%= formatted_date(@seance.starts_at) %></h6>
+    <p class="card-text"><%= @reservation.email %></p>
+    <table class="table table-hover mx-auto">
+        <thead>
+            <tr>
+                <th scope="col">Ticket ID</th>
+                <th scope="col">Ticket number</th>
+                <th scope="col">Seat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @reservation.tickets.each_with_index do |ticket, index| %>
+                <tr>
+                    <td><%= ticket.id %></td>
+                    <td><%= index + 1 %></td>
+                    <td><%= ticket.seat %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+  </div>
+
+  <div>
+     <%= form.select(:status, Reservation.statuses.keys) %>
+  </div>
+
+  <div class="col-auto">
+    <%= form.submit class: 'btn btn-primary mt-3' %>
+  </div>
+<% end %>
+</div>
