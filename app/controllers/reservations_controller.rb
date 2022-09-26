@@ -22,6 +22,13 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def show; end
+
+  def update
+    @reservation.update(status: params[:reservation][:status])
+    redirect_to seance_reservations_path
+  end
+
   private
 
   def set_seance
