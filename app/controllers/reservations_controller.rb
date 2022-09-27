@@ -11,15 +11,14 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = @seance.reservations.build(reservation_params)
-    if !params[:reservation][:seats].present?
-      @reservation.errors.add(:base, 'Choose at least one seat')
-      render :new, status: :unprocessable_entity
-    else
-      @reservation.save
+    @reservation = @seance.reservations.new(reservation_params)
+    Reservation.transaction do
+      @reservation.save!
       create_tickets
-      redirect_to seances_path
+    rescue StandardError
+      render :new, status: :unprocessable_entity and return
     end
+    redirect_to seances_path
   end
 
   def show; end
