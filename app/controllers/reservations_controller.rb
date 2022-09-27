@@ -7,7 +7,7 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @reservation = @seance.reservations.build
+    @reservation = @seance.reservations.new
   end
 
   def create
@@ -24,7 +24,7 @@ class ReservationsController < ApplicationController
   def show; end
 
   def update
-    @reservation.update(status: params[:reservation][:status])
+    @reservation.update(status: params[:status])
     redirect_to seance_reservations_path
   end
 
