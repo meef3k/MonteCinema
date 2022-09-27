@@ -3,7 +3,7 @@ class Reservation < ApplicationRecord
   has_many :tickets
   validates :status, :email, presence: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
-  enum :status, %i[booked accepted cancelled]
+  enum status: { booked: 0, accepted: 1, cancelled: 2 }
 
   def self.taken_seats(seance_id)
     includes(:tickets)
