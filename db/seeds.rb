@@ -16,11 +16,11 @@ movie_titles.each do |title|
   Movie.find_or_create_by(title: title, description: "#{title} movie", duration: (100..200).to_a.sample)
 end
 
-(1..10).each do |i|
-  value = 11-i
+10.times do |i|
+  value = 10-i
   start_time = Time.now + rand(3.days)
   t_price = (20..30).to_a.sample
-  Seance.find_or_create_by(movie_id: i, hall_id: value, :starts_at => start_time, price: t_price)
+  Seance.find_or_create_by(movie_id: i, hall_id: value, starts_at: start_time, price: t_price)
 end
 
 (3..10).each do |i|
@@ -28,10 +28,10 @@ end
   Promotion.find_or_create_by(value: i, information: "#{value}% discount for snack set in snack bar")
 end
 
-(1..100).each do |i|
+20.times do |i|
   Reservation.create(email: "example#{i}@example.com", status: (0..2).to_a.sample, seance_id: (1..10).to_a.sample)
 end
 
-(1..500).each do |i|
-  Ticket.create(seat: (0..200).to_a.sample, reservation_id: (0..100).to_a.sample)
+20.times do |i|
+  Ticket.find_or_create_by(seat: i, reservation_id: i)
 end
