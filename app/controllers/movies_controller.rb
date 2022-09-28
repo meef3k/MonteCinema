@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show edit update destroy]
-  before_action :set_seances, only: %i[show edit update destroy]
+  before_action :movie, only: %i[show edit update destroy]
+  before_action :seances, only: %i[show edit update destroy]
   def index
     @movies = Movie.all
   end
@@ -44,15 +44,15 @@ class MoviesController < ApplicationController
 
   private
 
-  def set_movie
-    @movie = Movie.find(params[:id])
+  def movie
+    @movie ||= Movie.find(params[:id])
   end
 
   def movie_params
     params.require(:movie).permit(:title, :description, :duration)
   end
 
-  def set_seances
-    @seances = Seance.where(movie_id: params[:id]).this_week
+  def seances
+    @seances ||= Seance.where(movie_id: params[:id]).this_week
   end
 end
