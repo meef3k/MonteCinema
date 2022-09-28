@@ -13,7 +13,7 @@
   <tbody>
     <% @seances.each do |seance| %>
       <tr>
-        <td><%= link_to formatted_date(seance.starts_at), seance %></td>
+        <td><%= link_to formatted_date(seance.starts_at), new_seance_reservation_path(seance.id) %></td>
       </tr>
     <% end %>
   </tbody>

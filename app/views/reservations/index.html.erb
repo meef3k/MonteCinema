@@ -8,6 +8,7 @@
       <th scope="col">Reservation id</th>
       <th scope="col">E-mail</th>
       <th scope="col">Status</th>
+      <th scope="col">Update status</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,9 @@
         <td><%= reservation.id %></td>
         <td><%= reservation.email %></td>
         <td><%= reservation.status %></td>
+        <td>
+          <%= button_to "Update", edit_seance_reservation_path(@seance, reservation), method: :get, class: 'btn btn-primary' %>
+        </td>
       </tr>
     <% end %>
   </tbody>

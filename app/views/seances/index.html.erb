@@ -15,7 +15,7 @@
         <td><%= link_to movie.title, movie %></td>
         <td>
         <% movie.seances.each do |seance| %>
-          <%= link_to formatted_hour(seance.starts_at), seance %>
+          <%= link_to formatted_hour(seance.starts_at), new_seance_reservation_path(seance.id) %>
         <% end %>
         </td>
       </tr>
