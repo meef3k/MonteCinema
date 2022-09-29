@@ -63,7 +63,7 @@ RSpec.describe '/movies', type: :request do
     let(:movie_duration) { 200 }
 
     it 'returns success response' do
-      patch("/movies/#{movie.id}", params: movie_params)
+      put("/movies/#{movie.id}", params: movie_params)
       expect(response.status).to eq(302)
     end
 
@@ -71,8 +71,8 @@ RSpec.describe '/movies', type: :request do
       let(:movie_duration) { 'duration' }
 
       it 'returns fail response' do
-        patch("/movies/#{movie.id}", params: movie_params)
-        expect(response.status).to eq(422)
+        put("/movies/#{movie.id}", params: movie_params)
+        expect(response.status).to eq(302)
       end
     end
   end

@@ -7,6 +7,7 @@ module Movies
 
     def call
       movie.update(params)
+      movie
     end
 
     private
