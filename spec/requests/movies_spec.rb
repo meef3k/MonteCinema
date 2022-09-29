@@ -72,7 +72,7 @@ RSpec.describe '/movies', type: :request do
 
       it 'returns fail response' do
         put("/movies/#{movie.id}", params: movie_params)
-        expect(response.status).to eq(302)
+        expect(response.status).to eq(422)
       end
     end
   end

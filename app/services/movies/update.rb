@@ -15,7 +15,7 @@ module Movies
     attr_reader :movie_id, :params
 
     def movie
-      Movie.find(movie_id)
+      @movie ||= Movie.find(movie_id)
     end
   end
 end
