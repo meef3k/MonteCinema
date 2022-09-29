@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
-  before_action :movie, only: %i[show edit update destroy]
-  before_action :seances, only: %i[show edit update destroy]
+  before_action :set_movie, only: %i[show edit update destroy]
+  before_action :seances, only: :show
   def index
     @movies = Movie.all
   end
@@ -14,38 +14,35 @@ class MoviesController < ApplicationController
   def edit; end
 
   def create
-    @movie = Movie.new(movie_params)
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to movie_url(@movie), notice: 'Movie was successfully created' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    @movie = ::Movies::Create.new(movie_params).call
+
+    if @movie.valid?
+      redirect_to movie_url(@movie), notice: 'Movie was successfully created'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @movie.update(movie_params)
-        format.html { redirect_to movie_url(@movie), notice: 'Movie was successfully updated' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    @movie = ::Movies::Update.new(movie_id: params[:id], params: movie_params).call
+
+    if @movie.errors.any?
+      render :edit, status: :unprocessable_entity
+    else
+      redirect_to movie_url(@movie), notice: 'Movie was successfully updated'
     end
   end
 
   def destroy
-    @movie.destroy
+    ::Movies::Delete.new(movie_id: params[:id]).call
 
-    respond_to do |format|
-      format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed' }
-    end
+    redirect_to movies_url, notice: 'Movie was successfully deleted'
   end
 
   private
 
-  def movie
-    @movie ||= Movie.find(params[:id])
+  def set_movie
+    @movie = Movie.find(params[:id])
   end
 
   def movie_params
