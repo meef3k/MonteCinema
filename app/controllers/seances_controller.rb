@@ -15,8 +15,10 @@ class SeancesController < ApplicationController
   def edit; end
 
   def create
-    @seance = ::Seances::Create.new(seance_params).call
+    hall_validate = HallsValidator.new(params: seance_params, movie: @movie).validate!
+    return unless hall_validate
 
+    @seance = ::Seances::Create.new(seance_params).call
     if @seance.valid?
       redirect_to seance_url(@seance), notice: 'Seance was successfully created'
     else
@@ -44,6 +46,10 @@ class SeancesController < ApplicationController
 
   def set_seance
     @seance = Seance.find(params[:id])
+  end
+
+  def set_movie
+    @movie = Movie.find(params[:movie_id])
   end
 
   def seance_params
