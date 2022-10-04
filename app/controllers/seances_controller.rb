@@ -1,21 +1,19 @@
 class SeancesController < ApplicationController
-  # GET /seances
-  def index
-    @movies = Movie.today
-  end
+  before_action :set_seance, only: %i[show edit update destroy]
+  before_action :set_halls, only: %i[new show create edit update]
+  before_action :set_movies, only: %i[new show create edit update]
+  before_action :today_movies, only: :index
 
-  # GET /seances/new
+  def index; end
+
+  def show; end
+
   def new
     @seance = Seance.new
-    @halls = Hall.all
-    @movies = Movie.all
   end
 
-  # POST /seances
   def create
     @seance = Seance.new(seance_params)
-    @halls = Hall.all
-    @movies = Movie.all
     respond_to do |format|
       if @seance.save
         format.html { redirect_to seances_url(@seance), notice: 'Seance was successfully created.' }
@@ -25,15 +23,43 @@ class SeancesController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @seance.update(seance_params)
+        format.html { redirect_to seance_url(@seance), notice: 'Seance was successfully updated.' }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @seance.destroy
+
+    respond_to do |format|
+      format.html { redirect_to seances_url, notice: 'Seance was successfully destroyed.' }
+    end
+  end
+
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_seance
     @seance = Seance.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def seance_params
     params.require(:seance).permit(:starts_at, :finishes_at, :price, :hall_id, :movie_id)
+  end
+
+  def set_halls
+    @halls = Hall.all
+  end
+
+  def set_movies
+    @movies = Movie.all
+  end
+
+  def today_movies
+    @movies = Movie.today
   end
 end
