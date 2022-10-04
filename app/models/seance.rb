@@ -21,21 +21,20 @@ class Seance < ApplicationRecord
     starts_at.nil?
   end
 
-  def used?
-    return if hall_available?
-
-    errors.add(:starts_at, 'Hall is used for another seance')
-  end
-
-  def set_time_period
+  def time_period
     starts_at..finishes_at
   end
 
-  def hall_available?
+  def used?
     seances = Seance.where(hall_id:).where.not(id:)
-    seances.any? do |s|
-      (s.starts_at..s.finishes_at).cover?(seance.set_time_period)
+
+    overlaps = seances.any? do |s|
+      time_period.overlaps?(s.time_period)
     end
+
+    errors.add(:overlaps_time_period, 'Hall is used for another seance') if overlaps
+
+    !overlaps
   end
 
   def available_seats
