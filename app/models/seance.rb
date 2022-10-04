@@ -27,13 +27,15 @@ class Seance < ApplicationRecord
     errors.add(:starts_at, 'Hall is used for another seance')
   end
 
+  def set_time_period
+    starts_at..finishes_at
+  end
+
   def hall_available?
-    Seance
-      .where(hall_id:)
-      .where(finishes_at: starts_at..finishes_at)
-      .or(Seance.where(hall_id:)
-      .where(starts_at: starts_at..finishes_at))
-      .empty?
+    seances = Seance.where(hall_id:).where.not(id:)
+    seances.any? do |s|
+      (s.starts_at..s.finishes_at).cover?(seance.set_time_period)
+    end
   end
 
   def available_seats
