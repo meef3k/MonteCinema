@@ -8,4 +8,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Metrics/BlockLength:
   Exclude:
-    - "spec/requests/*.rb"
+    - "spec/requests/*"
+    - "spec/services/**/*"
+Style/HashSyntax:
+  Enabled: false
