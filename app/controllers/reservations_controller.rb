@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
-  before_action :set_seance
-  before_action :set_reservation, only: %i[show edit update destroy]
+  before_action :seance
+  before_action :reservation, only: %i[show edit update destroy]
 
   def index
     @reservations = @seance.reservations
@@ -18,24 +18,24 @@ class ReservationsController < ApplicationController
     rescue StandardError
       render :new, status: :unprocessable_entity and return
     end
-    redirect_to seances_path
+    redirect_to seances_path, notice: 'Reservation was successfully created.'
   end
 
   def show; end
 
   def update
     @reservation.update(status: params[:status])
-    redirect_to seance_reservations_path
+    redirect_to seance_reservations_path, notice: 'Reservation was successfully updated.'
   end
 
   private
 
-  def set_seance
-    @seance = Seance.find(params[:seance_id])
+  def seance
+    @seance ||= Seance.find(params[:seance_id])
   end
 
-  def set_reservation
-    @reservation = @seance.reservations.find(params[:id])
+  def reservation
+    @reservation ||= @seance.reservations.find(params[:id])
   end
 
   def reservation_params
