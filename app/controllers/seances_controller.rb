@@ -1,7 +1,7 @@
 class SeancesController < ApplicationController
   before_action :set_seance, only: %i[show edit update destroy]
-  before_action :set_halls, only: %i[new show create edit update]
-  before_action :set_movies, only: %i[new show create edit update]
+  before_action :halls, only: %i[new show create edit update]
+  before_action :movies, only: %i[new show create edit update]
   before_action :today_movies, only: :index
 
   def index; end
@@ -51,15 +51,15 @@ class SeancesController < ApplicationController
     params.require(:seance).permit(:starts_at, :finishes_at, :price, :hall_id, :movie_id)
   end
 
-  def set_halls
-    @halls = Hall.all
+  def halls
+    @halls ||= Hall.all
   end
 
-  def set_movies
-    @movies = Movie.all
+  def movies
+    @movies ||= Movie.all
   end
 
   def today_movies
-    @movies = Movie.today
+    @today_movies ||= Movie.today
   end
 end
