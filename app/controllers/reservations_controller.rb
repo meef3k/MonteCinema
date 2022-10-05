@@ -18,14 +18,14 @@ class ReservationsController < ApplicationController
     rescue StandardError
       render :new, status: :unprocessable_entity and return
     end
-    redirect_to seances_path
+    redirect_to seances_path, notice: 'Reservation was successfully created.'
   end
 
   def show; end
 
   def update
     @reservation.update(status: params[:status])
-    redirect_to seance_reservations_path
+    redirect_to seance_reservations_path, notice: 'Reservation was successfully updated.'
   end
 
   private
