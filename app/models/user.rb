@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   PASSWORD_LENGTH = 72
   enum :role, %i[client cashier manager]
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable
   validate :password_length
 
   def password_length
