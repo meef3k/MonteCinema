@@ -17,10 +17,11 @@ movie_titles.each do |title|
 end
 
 10.times do |i|
+  movie = Movie.find(i+1)
   value = 10-i
   start_time = Time.now + rand(3.days)
   t_price = (20..30).to_a.sample
-  Seance.find_or_create_by(movie_id: i, hall_id: value, starts_at: start_time, price: t_price)
+  Seance.find_or_create_by(movie_id: i, hall_id: value, starts_at: start_time, price: t_price, movie: movie)
 end
 
 (3..10).each do |i|
@@ -32,6 +33,14 @@ end
   Reservation.create(email: "example#{i}@example.com", status: (0..2).to_a.sample, seance_id: (1..10).to_a.sample)
 end
 
-20.times do |i|
-  Ticket.find_or_create_by(seat: i, reservation_id: i)
-end
+client = User.new(email: 'client@monte.com', password: 'password', password_confirmation: 'password', role: :client)
+client.skip_confirmation!
+client.save!
+
+cashier = User.new(email: 'cashier@monte.com', password: 'password', password_confirmation: 'password', role: :cashier)
+cashier.skip_confirmation!
+cashier.save!
+
+manager = User.new(email: 'manager@monte.com', password: 'password', password_confirmation: 'password', role: :manager)
+manager.skip_confirmation!
+manager.save!
