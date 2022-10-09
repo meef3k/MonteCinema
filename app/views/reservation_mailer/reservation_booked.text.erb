@@ -1,0 +1,5 @@
+Your reservation with ID: #<%= @reservation.id %> was succesffuly booked
+<%= @reservation.seance.movie.title %>
+<%= (@reservation.seance.starts_at).strftime('%H:%M - %e %B') %>
+<%= @reservation.seance.hall.name %>
+Seats: <%= @reservation.tickets.map(&:seat).join(", ") %>
