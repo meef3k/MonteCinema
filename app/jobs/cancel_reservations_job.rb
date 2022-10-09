@@ -4,6 +4,7 @@ class CancelReservationsJob < ApplicationJob
   def perform
     outdated_reservations.each do |reservation|
       reservation.update(status: 'cancelled')
+      ReservationMailer.with(reservation: reservation).reservation_cancelled.deliver_later
     end
   end
 
