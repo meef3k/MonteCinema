@@ -18,7 +18,8 @@ class ReservationsController < ApplicationController
     rescue StandardError
       render :new, status: :unprocessable_entity and return
     end
-    ReservationMailer.with(reservation: @reservation).reservation_booked.deliver_later
+    CreateReservationsJob.perform_later(@reservation)
+    # ReservationMailer.with(reservation: @reservation).reservation_booked.deliver_later
     redirect_to seances_path, notice: 'Reservation was successfully created.'
   end
 
