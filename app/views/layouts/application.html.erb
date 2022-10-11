@@ -13,9 +13,18 @@
 
   <nav class="navbar sticky-top navbar-expand-lg bg-light">
   <div class="container-fluid w-75">
-    <a class="navbar-brand" href="#">MonteCinema</a>
+    <a class="navbar-brand" href="/seances">MonteCinema</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <a class="nav-link" href="/seances">What's On</a>
+      <a class="nav-link mx-2" href="/seances">What's On</a>
+      <% if current_user && policy(Seance).index? %>
+        <a class="nav-link mx-2" href="/seances">Reservations</a>
+      <% end %>
+      <% if current_user && policy(Movie).new? %>
+        <a class="nav-link mx-2" href="/movies/new">Create movie</a>
+      <% end %>
+      <% if current_user && policy(Seance).new? %>
+        <a class="nav-link mx-2" href="/seances/new">Create seance</a>
+      <% end %>
     </div>
   </div>
   <div class="d-flex">
@@ -23,6 +32,7 @@
     <%= link_to "Sign in", new_user_session_path, class: 'nav-link btn btn-primary text-white mx-2 w-70 p-1' %>
     <%= link_to "Sign up", new_user_registration_path, class: 'nav-link btn btn-secondary text-white mx-2 w-70 p-1' %>
   <% else %>
+    Welcome <%= current_user.email %>
     <%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-danger mx-2 text-white mx-2 w-70 p-1',  data: { "turbo-method": :delete} %>
   <% end %>
   </div>
