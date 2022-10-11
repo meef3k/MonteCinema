@@ -38,4 +38,4 @@
 !/app/assets/builds/.keep
 /coverage
 
-/dump.rdb
+*.rdb
