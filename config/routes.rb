@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :movies
   resources :seances do
     resources :reservations
+    post '/reservations/create_offline', to: 'reservations#create_offline', as: 'offline_reservation'
   end
   resources :halls
   # Defines the root path route ("/")

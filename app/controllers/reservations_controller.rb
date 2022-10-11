@@ -18,7 +18,7 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = @seance.reservations.new(reservation_params)
+    @reservation = @seance.reservations.new(email: reservation_params[:email], status: :booked)
     authorize @reservation
     render :new, status: :unprocessable_entity and return unless reservation_closed?
 
@@ -29,6 +29,19 @@ class ReservationsController < ApplicationController
       render :new, status: :unprocessable_entity and return
     end
     CreateReservationsJob.perform_later(@reservation)
+    redirect_to seances_path, notice: 'Reservation was successfully created.'
+  end
+
+  def create_offline
+    @reservation = @seance.reservations.new(email: reservation_params[:email], status: :accepted)
+    authorize @reservation
+
+    Reservation.transaction do
+      @reservation.save!
+      create_tickets
+    rescue StandardError
+      render :new, status: :unprocessable_entity and return
+    end
     redirect_to seances_path, notice: 'Reservation was successfully created.'
   end
 

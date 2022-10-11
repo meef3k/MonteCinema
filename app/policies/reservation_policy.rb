@@ -19,6 +19,10 @@ class ReservationPolicy < ApplicationPolicy
     true
   end
 
+  def create_offline?
+    cashier_or_manager?
+  end
+
   def update?
     cashier_or_manager?
   end
