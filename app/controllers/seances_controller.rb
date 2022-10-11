@@ -3,17 +3,27 @@ class SeancesController < ApplicationController
   before_action :halls, only: %i[new show create edit update]
   before_action :movies, only: %i[new show create edit update]
   before_action :today_movies, only: :index
+  before_action :authenticate_user!, except: [:index]
 
   def index; end
 
-  def show; end
+  def show
+    authorize @seance
+  end
 
   def new
+    authorize Seance
     @seance = Seance.new
+  end
+
+  def edit
+    authorize @seance
   end
 
   def create
     @seance = Seance.new(seance_params)
+    authorize @seance
+
     respond_to do |format|
       if @seance.save
         format.html { redirect_to seances_url(@seance), notice: 'Seance was successfully created.' }
@@ -24,6 +34,7 @@ class SeancesController < ApplicationController
   end
 
   def update
+    authorize @seance
     respond_to do |format|
       if @seance.update(seance_params)
         format.html { redirect_to seance_url(@seance), notice: 'Seance was successfully updated.' }
@@ -34,6 +45,7 @@ class SeancesController < ApplicationController
   end
 
   def destroy
+    authorize @seance
     @seance.destroy
 
     respond_to do |format|
