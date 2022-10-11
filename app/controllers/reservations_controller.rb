@@ -18,6 +18,7 @@ class ReservationsController < ApplicationController
     rescue StandardError
       render :new, status: :unprocessable_entity and return
     end
+    CreateReservationsJob.perform_later(@reservation)
     redirect_to seances_path, notice: 'Reservation was successfully created.'
   end
 

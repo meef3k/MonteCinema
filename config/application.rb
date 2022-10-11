@@ -33,5 +33,8 @@ module MonteCinema
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.active_job.queue_adapter = :sidekiq
+    config.time_zone = 'Warsaw'
+    config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
   end
 end
