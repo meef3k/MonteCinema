@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :seance
   before_action :reservation, only: %i[show edit update destroy]
-  before_action :authenticate_user!, except: %i[new create show]
+  before_action :authenticate_user!, except: %i[new create]
 
   def index
     @reservations = @seance.reservations
