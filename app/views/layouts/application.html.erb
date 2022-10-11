@@ -19,6 +19,9 @@
       <% if current_user && policy(Seance).index? %>
         <a class="nav-link mx-2" href="/seances">Reservations</a>
       <% end %>
+      <% if current_user && policy(Movie).index? %>
+        <a class="nav-link mx-2" href="/movies">Movies</a>
+      <% end %>
       <% if current_user && policy(Movie).new? %>
         <a class="nav-link mx-2" href="/movies/new">Create movie</a>
       <% end %>
