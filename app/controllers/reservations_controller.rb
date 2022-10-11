@@ -20,6 +20,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = @seance.reservations.new(reservation_params)
     authorize @reservation
+    render :new, status: :unprocessable_entity and return unless reservation_closed?
 
     Reservation.transaction do
       @reservation.save!
@@ -59,5 +60,16 @@ class ReservationsController < ApplicationController
     params[:reservation][:seats].each do |seat|
       Ticket.create(reservation_id: @reservation.id, seat:)
     end
+  end
+
+  def after_time?
+    seance.starts_at <= Time.zone.now + 30.minutes
+  end
+
+  def reservation_closed?
+    return true unless after_time?
+
+    @reservation.errors.add(:reservations_closed, 'Please make reservation at ticket desk')
+    false
   end
 end
