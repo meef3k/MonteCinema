@@ -4,7 +4,7 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def show?
-    cashier_or_manager? || client?
+    cashier_or_manager?
   end
 
   def new?
@@ -27,9 +27,5 @@ class ReservationPolicy < ApplicationPolicy
 
   def cashier_or_manager?
     user.cashier? || user.manager?
-  end
-
-  def client?
-    user.client?
   end
 end
