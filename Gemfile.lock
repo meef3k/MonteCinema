@@ -93,6 +93,10 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     docile (1.4.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.11.0)
     et-orbi (1.2.7)
       tzinfo
@@ -127,7 +131,6 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.0)
     minitest (5.16.3)
     msgpack (1.5.6)
     net-imap (0.2.3)
@@ -145,9 +148,6 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.8)
-      mini_portile2 (~> 2.8.0)
-      racc (~> 1.4)
     nokogiri (1.13.8-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
@@ -287,6 +287,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise (~> 4.8.1)
+  dotenv-rails (~> 2.8.1)
   factory_bot_rails (~> 6.2.0)
   faker (~> 2.23.0)
   jbuilder
