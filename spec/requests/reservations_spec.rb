@@ -2,7 +2,14 @@ require 'rails_helper'
 
 RSpec.describe '/reservations', type: :request do
   let(:seance) { create :seance }
+  let(:user) { create :user }
+
   describe 'GET /seances/id/reservations' do
+    before do
+      sign_in user
+      request
+    end
+
     it 'returns success response' do
       get("/seances/#{seance.id}/reservations")
       expect(response.status).to eq(200)
@@ -11,6 +18,11 @@ RSpec.describe '/reservations', type: :request do
 
   describe 'GET /seances/id/reservations/id' do
     let(:reservation) { create :reservation, seance_id: seance.id }
+    before do
+      sign_in user
+      request
+    end
+
     it 'returns success response' do
       get("/seances/#{seance.id}/reservations/#{reservation.id}")
       expect(response.status).to eq(200)

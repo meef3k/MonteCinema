@@ -14,10 +14,11 @@ RSpec.describe CancelReservationsJob, type: :job do
   end
 
   describe 'cancel reservations perform' do
+    let!(:seance) { create :seance, starts_at: DateTime.now }
     let!(:ticket) { create :ticket }
-    let!(:reservation) { create :reservation, tickets: [ticket] }
+    let!(:reservation) { create :reservation, tickets: [ticket], seance_id: seance.id }
 
-    it 'changes reservations stqtus to cancelled' do
+    it 'changes reservations status to cancelled' do
       expect { subject.perform_now }.to change { reservation.reload.status }.from('booked').to('cancelled')
     end
   end
