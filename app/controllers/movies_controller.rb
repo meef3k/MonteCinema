@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
 
   def index
     authorize Movie
-    @movies = Movie.all
+    @pagy, @movies = pagy(Movie.all)
   end
 
   def show

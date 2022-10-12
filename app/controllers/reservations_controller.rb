@@ -4,7 +4,7 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
 
   def index
-    @reservations = @seance.reservations
+    @pagy, @reservations = pagy(@seance.reservations)
     authorize @reservations
   end
 

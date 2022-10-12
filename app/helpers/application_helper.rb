@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def formatted_hour(date)
     date.strftime('%H:%M')
   end
