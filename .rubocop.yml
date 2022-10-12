@@ -10,7 +10,10 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Metrics/BlockLength:
   Exclude:
-    - "spec/requests/*"
-    - "spec/services/**/*"
+    - 'spec/requests/*'
+    - 'spec/services/**/*'
+Metrics/MethodLength:
+  Exclude:
+    - 'app/controllers/*'
 Style/HashSyntax:
   Enabled: false

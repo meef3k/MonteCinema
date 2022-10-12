@@ -1,42 +1,55 @@
+<div class="card w-50 my-3 m-auto border-0">
+<h1>Create reservation</h1>
+</div>
 <div class="card w-50 p-3 mx-auto col-md-3">
   <%= form_with(model: [@seance, @reservation], local: true) do |form| %>
-  <% if @reservation.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+    <% if @reservation.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
 
-      <ul>
-        <% @reservation.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <ul>
+          <% @reservation.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="card-body">
+      <h5 class="card-title"><%= @seance.movie.title %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= formatted_date(@seance.starts_at) %></h6>
+      <p class="card-text"><%= @seance.price %>$</p>
+    </div>
+
+    <% @seance.hall.seats.each do |seat| %>
+      <div class="form-check form-check-inline">
+        <%if @seance.available_seats.include?(seat)%>
+          <%= form.check_box :seats, { multiple: true, class: "form-check-input"}, seat, nil %>
+          <%= form.label :seats, seat, class: "form-check-label"%>
+        <%else%>
+          <%= form.check_box :seats, { multiple: true, class: "form-check-input", disabled: true}, seat, nil %>
+          <%= form.label :seats, seat, class: "form-check-label"%>
         <% end %>
-      </ul>
-    </div>
+      </div>
+    <% end %>
+
+    <% if !user_signed_in?  %>
+      <div class="form-group row my-2">
+        <%= form.label :email, style: "display: block", class: "col-sm-2 col-form-label" %> 
+        <div class="col-sm-10">
+          <%= form.text_field :email, class: "form-control", placeholder: "Enter email" %>
+        </div>
+      </div>
+    <% else %>
+      <div>
+        <%= form.hidden_field :email, class: "form-label", value: current_user.email %>
+      </div>
+    <% end %>
+
+    <% if user_signed_in? && policy(@reservation).create_offline? %>
+      <%= form.submit 'Create offline reservation', formaction: seance_offline_reservation_path, class: 'btn btn-primary my-2' %>
+    <% else %>
+      <%= form.submit class: 'btn btn-primary my-2' %>
+    <% end %>
   <% end %>
-
-  <div class="card-body">
-    <h5 class="card-title"><%= @seance.movie.title %></h5>
-    <h6 class="card-subtitle mb-2 text-muted"><%= formatted_date(@seance.starts_at) %></h6>
-    <p class="card-text"><%= @seance.price %>$</p>
-  </div>
-
-  <% @seance.hall.seats.each do |seat| %>
-    <div class="form-check form-check-inline">
-      <%if @seance.available_seats.include?(seat)%>
-        <%= form.check_box :seats, { multiple: true, class: "form-check-input"}, seat, nil %>
-        <%= form.label :seats, seat, class: "form-check-label"%>
-      <%else%>
-        <%= form.check_box :seats, { multiple: true, class: "form-check-input", disabled: true}, seat, nil %>
-        <%= form.label :seats, seat, class: "form-check-label"%>
-      <% end %>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email, class: "form-label" %>
-  </div>
-
-  <div class="col-auto">
-    <%= form.submit class: 'btn btn-primary mb-3' %>
-  </div>
-<% end %>
 </div>

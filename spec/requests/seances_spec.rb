@@ -1,5 +1,12 @@
 require 'rails_helper'
 RSpec.describe '/seances', type: :request do
+  let(:user) { create :user }
+
+  before do
+    sign_in user
+    request
+  end
+
   describe 'GET /seances' do
     it 'returns success response' do
       get('/seances')

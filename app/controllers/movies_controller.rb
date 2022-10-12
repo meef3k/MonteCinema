@@ -1,20 +1,29 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[show edit update destroy]
   before_action :seances, only: :show
+  before_action :authenticate_user!, except: [:show]
+
   def index
-    @movies = Movie.all
+    authorize Movie
+    @pagy, @movies = pagy(Movie.all)
   end
 
-  def show; end
+  def show
+    authorize @movie
+  end
 
   def new
+    authorize Movie
     @movie = Movie.new
   end
 
-  def edit; end
+  def edit
+    authorize @movie
+  end
 
   def create
     @movie = ::Movies::Create.new(movie_params).call
+    authorize @movie
 
     if @movie.valid?
       redirect_to movie_url(@movie), notice: 'Movie was successfully created'
@@ -25,6 +34,7 @@ class MoviesController < ApplicationController
 
   def update
     @movie = ::Movies::Update.new(movie_id: params[:id], params: movie_params).call
+    authorize @movie
 
     if @movie.errors.any?
       render :edit, status: :unprocessable_entity
@@ -34,6 +44,7 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+    authorize @movie
     ::Movies::Delete.new(movie_id: params[:id]).call
 
     redirect_to movies_url, notice: 'Movie was successfully deleted'

@@ -1,6 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
+<div class="card w-75 my-3 m-auto border-0">
 <h1>Movies</h1>
+<p style="color: green"><%= notice %></p>
+<div class="my-2"><%== pagy_bootstrap_nav(@pagy) %></div>
+</div>
 
 <table class="table table-hover w-75 mx-auto">
   <thead>
@@ -8,8 +10,10 @@
       <th scope="col">Title</th>
       <th scope="col">Duration</th>
       <th scope="col">Show</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
+      <% if current_user && policy(@movies).new? %>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -20,12 +24,14 @@
         <td>
           <%= button_to "Show", movie_path(movie), method: :get, class: 'btn btn-primary' %>
         </td>
-        <td>
-          <%= button_to "Edit", edit_movie_path(movie), method: :get, class: 'btn btn-secondary' %>
-        </td>
-        <td>
-          <%= button_to "Delete", movie, method: :delete, class: 'btn btn-danger' %>
-        </td>
+        <% if current_user && policy(@movies).new? %>
+          <td>
+            <%= button_to "Edit", edit_movie_path(movie), method: :get, class: 'btn btn-secondary' %>
+          </td>
+          <td>
+            <%= button_to "Delete", movie, method: :delete, class: 'btn btn-danger' %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
