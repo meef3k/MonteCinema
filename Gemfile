@@ -7,6 +7,8 @@ gem 'rails', '~> 7.0.3'
 
 gem 'sprockets-rails'
 
+gem 'dotenv-rails', '~> 2.8.1'
+
 gem 'pagy', '~> 5.10'
 
 gem 'pg', '~> 1.1'
