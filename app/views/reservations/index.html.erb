@@ -1,6 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
+<div class="card w-75 my-3 m-auto border-0">
 <h1>Reservations</h1>
+<p style="color: green"><%= notice %></p>
+<%= button_to "Create reservation", new_seance_reservation_path(@seance.id), method: :get, class: 'btn btn-primary'  %>
+</div>
 
 <table class="table table-hover w-75 mx-auto">
   <thead>

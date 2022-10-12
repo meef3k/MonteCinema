@@ -16,9 +16,6 @@
     <a class="navbar-brand" href="/seances">MonteCinema</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <a class="nav-link mx-2" href="/seances">What's On</a>
-      <% if current_user && policy(Seance).index? %>
-        <a class="nav-link mx-2" href="/seances">Reservations</a>
-      <% end %>
       <% if current_user && policy(Movie).index? %>
         <a class="nav-link mx-2" href="/movies">Movies</a>
       <% end %>

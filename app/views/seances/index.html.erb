@@ -1,6 +1,7 @@
-<p style="color: green"><%= notice %></p>
-
+<div class="card w-75 my-3 m-auto border-0">
 <h1>What's on today</h1>
+<p style="color: green"><%= notice %></p>
+</div>
 
 <table class="table table-hover w-75 mx-auto">
   <thead>
@@ -15,7 +16,11 @@
         <td><%= link_to movie.title, movie %></td>
         <td>
         <% movie.seances.each do |seance| %>
-          <%= link_to formatted_hour(seance.starts_at), new_seance_reservation_path(seance.id) %>
+          <% if current_user && policy(Seance).index? %>
+            <%= link_to formatted_hour(seance.starts_at), seance_reservations_path(seance.id) %>
+          <% else %>
+            <%= link_to formatted_hour(seance.starts_at), new_seance_reservation_path(seance.id) %>
+          <% end %>
         <% end %>
         </td>
       </tr>
