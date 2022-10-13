@@ -7,7 +7,6 @@ RSpec.describe '/reservations', type: :request do
   describe 'GET /seances/id/reservations' do
     before do
       sign_in user
-      request
     end
 
     it 'returns success response' do
@@ -20,7 +19,6 @@ RSpec.describe '/reservations', type: :request do
     let(:reservation) { create :reservation, seance_id: seance.id }
     before do
       sign_in user
-      request
     end
 
     it 'returns success response' do

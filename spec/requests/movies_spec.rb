@@ -4,7 +4,6 @@ RSpec.describe '/movies', type: :request do
 
   before do
     sign_in user
-    request
   end
 
   describe 'GET /movies' do
